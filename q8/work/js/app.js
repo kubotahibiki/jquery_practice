@@ -3,11 +3,7 @@ $(function () {
   function goDone(response){  //通信に成功した場合の処理内容
     $(".message").remove(); //メッセージを削除
     const totalResults=response[0]["opensearch:totalResults"];  //検索結果の総数
-    if(totalResults==null){  //検索結果が0個（null）の場合、以下のメッセージを表示する
-      $(".lists").before('<div class="message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</div>');
-    }else if(totalResults/20<=page-1){//すべての検索結果が表示されている（これ以上検索結果が存在しない）状態で検索ボタンが押されたときに以下のメッセージを表示する
-      //console.log(totalResults/20);
-      //console.log(page-1);
+    if(totalResults===null){  //検索結果が0個（null）の場合、以下のメッセージを表示する
       $(".lists").before('<div class="message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</div>');
     }else{//表示するデータがある（追加で表示できる）場合
       for (index in response[0].items){ //取得したデータをHTML文に入れるループ処理
