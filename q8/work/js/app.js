@@ -2,8 +2,7 @@
 $(function () {
   function goDone(response){  //通信に成功した場合の処理内容
     $(".message").remove(); //メッセージを削除
-    const totalResults=response[0]["opensearch:totalResults"];  //検索結果の総数
-    if(totalResults===null || totalResults/20<=page-1){  //検索結果が0個（null）またはこれ以上検索結果を表示できないとき、以下のメッセージを表示する
+    if(response[0]["opensearch:itemsPerPage"]==0){  //表示する件数が0件のとき以下メッセージを表示
       $(".lists").before('<div class="message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</div>');
     }else{//表示するデータがある（追加で表示できる）場合
       for (index in response[0].items){ //取得したデータをHTML文に入れるループ処理
